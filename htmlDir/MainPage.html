@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <title>MainPage</title>
     <link rel="stylesheet" type="text/css" href="../cssDir/Mainpage.css">
+    <script src="../jsDir/MainPage.js"></script>
 </head>
 <body>
 <header class="headBar">
     <div>
-        <img id="logoImg" src="../img/Java_logo.jfif">
-        <img id="logoText" src="../img/logo1.svg">
+        <!-- Click the icon to show books -->
+        <img id="logoImg" src="../img/Java_logo.jfif" onclick="showBook('bookPage')">
+        <img id="logoText" src="../img/logo1.svg" onclick="showBook('bookPage')">
     </div>
     <div class="great">
         <span class="name">Hi, XXX!</span>
@@ -32,9 +34,8 @@
         <img src="../img/search_icon.png">
     </div>
     <div class="bookPage">
-        <img src="../img/javabook.png">
-        <img src="../img/icsbook.png">
-
+        <img src="../img/javabook.png" style="visibility: hidden">
+        <img src="../img/icsbook.png" style="visibility: hidden">
     </div>
 </section>
 
