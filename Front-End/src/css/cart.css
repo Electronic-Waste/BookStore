@@ -1,0 +1,53 @@
+.cartItemExcel {
+
+}
+
+.cartItem {
+    height: 200px;
+    padding: 10px 20px 0px 20px;
+    border: 0px solid whitesmoke;
+    border-bottom-width: 3px;
+
+}
+
+.cartItemImage {
+    float: left;
+}
+
+.cartItemImage img {
+    height: 180px;
+}
+
+.cartItemName {
+    float: left;
+    margin-left: 10px;
+    margin-top: 65px;
+}
+
+.cartItemPrice {
+    float: left;
+    margin-left: 40px;
+    margin-top: 62px;
+    color: red;
+}
+
+.cartItemBtn {
+    float: right;
+    margin-right: 40px;
+    margin-top: 60px;
+
+}
+
+.cartItemBtn input {
+    border: 2px solid red;
+    border-radius: 28px;
+    background-color: transparent;
+    color: red;
+    padding: 6px 12px;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+}
+
+.cartItemBtn input:hover {
+    background-color: red;
+    color: white;
+}
