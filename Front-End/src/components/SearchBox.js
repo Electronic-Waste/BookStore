@@ -22,10 +22,10 @@ export class SearchBox extends React.Component {
     }
 }
 
-export function ClassifyItem(itemGroup) {
+export function ClassifyItem(itemGroup, classify) {
     return (
         <div className="classifyItem">
-            <button>{itemGroup}</button>
+            <button data-type={itemGroup} onClick={classify}>{itemGroup}</button>
         </div>
     );
 }
@@ -38,10 +38,11 @@ export class ClassifyBox extends React.Component {
     render() {
         return (
             <div className="classify">
-                {ClassifyItem("#Coding")}
-                {ClassifyItem("#Magic Novel")}
-                {ClassifyItem("#World Master Pieces")}
-                {ClassifyItem("More...")}
+                {ClassifyItem("#编程", this.props.classify)}
+                {ClassifyItem("#世界名著", this.props.classify)}
+                {ClassifyItem("#魔幻小说", this.props.classify)}
+                {ClassifyItem("#武侠小说", this.props.classify)}
+                {ClassifyItem("#更多", this.props.classify)}
             </div>
         );
     }

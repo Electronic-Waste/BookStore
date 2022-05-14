@@ -3,16 +3,31 @@ import React from "react";
 import "../css/bookDetail.css"
 import purchaseIcon from "../assets/purchase.svg"
 import cartIcon from "../assets/cart.svg"
-import {data, headers} from "../view/HomeView";
+import {headers} from "../view/HomeView";
+import {getBook} from "../services/bookService";
 
 export class BookDetail extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            dataSource: data[this.props.index],
+            dataSource: [],
+            book: "",
             editIndex: -1
         }
+
+    }
+
+    componentDidMount() {
+        let id = window.location.href.split('/')[5];
+        let bookID = {"id": id};
+        console.log(bookID);
+        const callback = (data) => {
+            this.setState({
+                book: data
+            });
+        }
+        getBook(bookID, callback);
 
     }
 
@@ -37,7 +52,7 @@ export class BookDetail extends React.Component {
     }
 
     createItem(idx) {
-        let content = this.state.dataSource[idx];
+        let content = this.state.book[idx];
         let editIndex = this.state.editIndex;
         if (editIndex >= 0 && editIndex == idx) {
             content = (
@@ -55,16 +70,18 @@ export class BookDetail extends React.Component {
         return (
             <div className="book_details">
                 <div className="book_img">
-                    <img src={this.state.dataSource[6]}/>
+                    <img src={this.state.book.image}/>
                 </div>
                 <div className="book_description">
                     <table>
+                        <tbody>
                         <tr>{this.createItem(0)}</tr>
                         <tr>{this.createItem(1)}</tr>
                         <tr>{this.createItem(2)}</tr>
                         <tr>{this.createItem(3)}</tr>
                         <tr>{this.createItem(5)}</tr>
                         <tr>{this.createItem(4)}</tr>
+                        </tbody>
                     </table>
                 </div>
             </div>

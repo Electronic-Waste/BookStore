@@ -54,7 +54,7 @@ html, body, #root{
     background: transparent;
 }
 
-.loginForm input[type="submit"]{
+.loginForm input[type="button"]{
     background: transparent;
     border: none;
     outline: none;

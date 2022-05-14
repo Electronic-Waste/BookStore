@@ -10,16 +10,18 @@ import {Link} from "react-router-dom";
 export class SideBar extends React.Component {
 
     render() {
+        let usrname = window.location.href.split('/')[3];
+        let basicUrl = "/" + usrname;
         return (
             <div className="sideBar">
                 <ul>
-                    <Link to="/HomeView">
+                    <Link to={basicUrl + "/HomeView"}>
                         <li><img src={bookIcon}/> </li>
                     </Link>
-                    <Link to="/CartView">
+                    <Link to={basicUrl + "/CartView"}>
                         <li><img src={cartIcon}/></li>
                     </Link>
-                    <Link to="/OrderView">
+                    <Link to={basicUrl + "/OrderView"}>
                         <li><img src={orderIcon}/></li>
                     </Link>
                     <li><img src={profileIcon}/> </li>

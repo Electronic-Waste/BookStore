@@ -17,10 +17,10 @@ export class BasicRoute extends React.Component{
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<LoginView/>}></Route>
-                    <Route path="/HomeView" element={<HomeView/>}></Route>
-                    <Route path="/BookView/:name" element={<BookView/>}></Route>
-                    <Route path="/CartView" element={<CartView/>}></Route>
-                    <Route path={"/OrderView"} element={<OrderView/>}></Route>
+                    <Route path="/:username/HomeView" element={<HomeView/>}></Route>
+                    <Route path="/:username/BookView/:name" element={<BookView/>}></Route>
+                    <Route path="/:username/CartView" element={<CartView/>}></Route>
+                    <Route path="/:username/OrderView" element={<OrderView/>}></Route>
                 </Routes>
             </BrowserRouter>
         );
