@@ -10,7 +10,7 @@ export class CartExcel extends React.Component {
 
         this.state = {
             username: window.location.href.split('/')[3],
-            books: []
+            carts: []
         }
     }
 
@@ -21,7 +21,7 @@ export class CartExcel extends React.Component {
     refreshPage() {
         let data = {"username": this.state.username};
         const callback = (data) => {
-            this.setState({books: data});
+            this.setState({carts: data});
         }
         getCart(data, callback);
     }
@@ -49,21 +49,24 @@ export class CartExcel extends React.Component {
                 <div className="cartButtonArea">
                     <input type="button" value="Buy All" onClick={this.buyAll}/>
                 </div>
-                {this.state.books.map((book, idx) =>
-                    <div className="cartItem" data-key={book["bookID"]}>
+                {this.state.carts.map((cart, idx) =>
+                    <div className="cartItem" data-key={cart.book["bookID"]}>
                         <div className="cartItemImage">
-                            <Link to={basicRoute + "/" + book["bookID"]}>
-                                <img src={book["image"]}/>
+                            <Link to={basicRoute + "/" + cart.book["bookID"]}>
+                                <img src={cart.book["image"]}/>
                             </Link>
                         </div>
                         <div className="cartItemName">
-                            <h3>{book["bookName"]}</h3>
+                            <h3>{cart.book["bookName"]}</h3>
                         </div>
                         <div className="cartItemPrice">
-                            <h2>￥{book["price"]}</h2>
+                            <h2>￥{cart.book["price"] * cart.num}</h2>
+                        </div>
+                        <div className="cartItemNum">
+                            <h2>{cart.num}</h2>
                         </div>
                         <div className="cartItemBtn">
-                            <input type="button" data-key={book["bookID"]}
+                            <input type="button" data-key={cart.book["bookID"]}
                                    onClick={this.hanleClick} value="Buy Now"/>
                         </div>
                     </div>

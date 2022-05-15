@@ -1,6 +1,7 @@
 package com.example.backend.controller;
 
 import com.example.backend.entity.Book;
+import com.example.backend.entity.Cart;
 import com.example.backend.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,7 +25,7 @@ public class CartController {
     }
 
     @RequestMapping("/getcart")
-    public List<Book> getCart(@RequestBody Map<String, String> params) {
+    public List<Cart> getCart(@RequestBody Map<String, String> params) {
         String username = params.get("username");
         return cartService.getCart(username);
     }

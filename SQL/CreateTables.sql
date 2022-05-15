@@ -29,6 +29,7 @@ create table Orders (
 create table Cart (
     UserID varchar(6),
     BookID char(5),
+    Num int,
     foreign key (UserID) references User(UserID),
     foreign key (BookID) references Book(BookID)
 );
@@ -37,6 +38,7 @@ create table OrderItem (
     OrderID int,
     BookID char(5),
     Price double,
+    Num int,
     foreign key (OrderID) references Orders(OrderID),
     foreign key (BookID) references Book(BookID)
 );

@@ -5,10 +5,12 @@ import lombok.Data;
 @Data
 public class Cart {
     private String UserID;
-    private String BookID;
+    private Book Book;
+    private int Num;
 
-    public Cart(String userID, String bookID) {
+    public Cart(String userID, Book book, int num) {
         this.UserID = userID;
-        this.BookID = bookID;
+        this.Book = book;
+        this.Num = num;
     }
 }

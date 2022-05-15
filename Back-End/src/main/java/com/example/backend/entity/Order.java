@@ -2,6 +2,8 @@ package com.example.backend.entity;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 @Data
 public class Order {
     private String UserID;

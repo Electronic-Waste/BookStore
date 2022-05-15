@@ -2,6 +2,8 @@ package com.example.backend.entity;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 @Data
 public class Book {
     private String BookID;
@@ -9,12 +11,12 @@ public class Book {
     private String BookName;
     private String Author;
     private String Type;
-    private double Price;
+    private Double Price;
     private String Description;
     private String Inventory;
     private String Image;
 
-    public Book(String bookID, String bookName, String author, String type, double price, String description, String inventory, String image) {
+    public Book(String bookID, String bookName, String author, String type, Double price, String description, String inventory, String image) {
         this.BookID = bookID;
         this.BookName = bookName;
         this.Author = author;

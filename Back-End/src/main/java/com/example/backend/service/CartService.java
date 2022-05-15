@@ -1,6 +1,7 @@
 package com.example.backend.service;
 
 import com.example.backend.entity.Book;
+import com.example.backend.entity.Cart;
 
 import java.util.List;
 
@@ -12,5 +13,5 @@ public interface CartService {
 
     boolean deleteAllBooksFromCart(String username);
 
-    List<Book> getCart(String username);
+    List<Cart> getCart(String username);
 }

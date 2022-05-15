@@ -1,6 +1,7 @@
 package com.example.backend.serviceimpl;
 
 import com.example.backend.entity.Book;
+import com.example.backend.entity.Cart;
 import com.example.backend.entity.Order;
 import com.example.backend.service.BookService;
 import com.example.backend.service.CartService;
@@ -38,19 +39,27 @@ public class OrderServiceImpl implements OrderService {
         String userid = jdbcTemplate.queryForObject(findUserID, params, String.class);
 
         /* Get Book */
-        Book book = bookService.findBookById(bookid);
-        double price = book.getPrice();
+        List<Cart> bookArr = cartService.getCart(username);
+        double price = 0;
+        int bookNum = 0;
+        for (int i = 0; i < bookArr.size(); ++i)
+            if (bookArr.get(i).getBook().getBookID().equals(bookid)) {
+                bookNum = bookArr.get(i).getNum();
+                price = bookArr.get(i).getBook().getPrice() * bookNum;
+                break;
+            }
 
         /* Create Order */
         String orderSql = "INSERT INTO orders(UserID, Price) VALUES(?, ?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
+        double finalPrice = price;
         int result= jdbcTemplate.update(new PreparedStatementCreator() {
             @Override
             public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
                 int index = 1;
                 PreparedStatement ps = con.prepareStatement(orderSql, Statement.RETURN_GENERATED_KEYS);
                 ps.setString(1, userid);
-                ps.setDouble(2, price);
+                ps.setDouble(2, finalPrice);
                 return ps;
             }
         }, keyHolder);
@@ -58,8 +67,8 @@ public class OrderServiceImpl implements OrderService {
         System.out.println("OrderID: " + orderid);
 
         /* Create OrderItem */
-        String orderItemSql = "INSERT INTO orderitem(OrderID, BookID, Price) VALUES(?, ?, ?)";
-        params = new Object[] {orderid, bookid, price};
+        String orderItemSql = "INSERT INTO orderitem(OrderID, BookID, Price, Num) VALUES(?, ?, ?, ?)";
+        params = new Object[] {orderid, bookid, price, bookNum};
         jdbcTemplate.update(orderItemSql, params);
     }
 
@@ -70,10 +79,10 @@ public class OrderServiceImpl implements OrderService {
         String userid = jdbcTemplate.queryForObject(findUserID, params, String.class);
 
         /* Get books */
-        List<Book> bookArr = cartService.getCart(username);
+        List<Cart> bookArr = cartService.getCart(username);
         double totalPrice = 0;
         for (int i = 0; i < bookArr.size(); ++i)
-            totalPrice += bookArr.get(i).getPrice();
+            totalPrice += bookArr.get(i).getBook().getPrice() * bookArr.get(i).getNum();
 
         /* Create Order */
         String orderSql = "INSERT INTO orders(UserID, Price) VALUES(?, ?)";
@@ -94,10 +103,11 @@ public class OrderServiceImpl implements OrderService {
 
         /* Create OrderItem */
         for (int i = 0; i < bookArr.size(); ++i) {
-            String bookid = bookArr.get(i).getBookID();
-            Double price = bookArr.get(i).getPrice();
-            String orderItemSql = "INSERT INTO orderitem(OrderID, BookID, Price) VALUES(?, ?, ?)";
-            params = new Object[] {orderid, bookid, price};
+            String bookid = bookArr.get(i).getBook().getBookID();
+            Double price = bookArr.get(i).getBook().getPrice();
+            int bookNum = bookArr.get(i).getNum();
+            String orderItemSql = "INSERT INTO orderitem(OrderID, BookID, Price, Num) VALUES(?, ?, ?, ?)";
+            params = new Object[] {orderid, bookid, price, bookNum};
             jdbcTemplate.update(orderItemSql, params);
         }
     }
