@@ -2,8 +2,8 @@ import React from "react";
 
 import {HeadBar} from "../components/HeadBar";
 import {SideBar} from "../components/SideBar";
-import {CartItem} from "../components/CartItem";
-import "../css/cart.css"
+import {OrderExcel} from "../components/OrderExcel";
+import "../css/order.css"
 
 export class OrderView extends React.Component {
 
@@ -17,8 +17,8 @@ export class OrderView extends React.Component {
                     <SideBar/>
                 </aside>
                 <section>
-                    <div className="cartItmExcel">
-                        <CartItem btnName="More Info"/>
+                    <div className="orderItmExcel">
+                        <OrderExcel/>
                     </div>
                 </section>
             </div>

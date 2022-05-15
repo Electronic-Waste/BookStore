@@ -18,14 +18,12 @@ public class BookController {
 
     @RequestMapping("/getBooks")
     public List<Book> getBooks() {
-        System.out.println("In /getBooks");
         return bookService.getBooks();
     }
 
     @RequestMapping("/getBook")
     public Book getBook(@RequestBody Map<String, String> params){
         String id = params.get("id");
-        System.out.println("In /getBook");
         return bookService.findBookById(id);
     }
 }

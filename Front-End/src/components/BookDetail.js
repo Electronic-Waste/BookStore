@@ -5,6 +5,7 @@ import purchaseIcon from "../assets/purchase.svg"
 import cartIcon from "../assets/cart.svg"
 import {headers} from "../view/HomeView";
 import {getBook} from "../services/bookService";
+import {addToCart} from "../services/cartService";
 
 export class BookDetail extends React.Component {
     constructor(props) {
@@ -21,7 +22,7 @@ export class BookDetail extends React.Component {
     componentDidMount() {
         let id = window.location.href.split('/')[5];
         let bookID = {"id": id};
-        console.log(bookID);
+        //console.log(bookID);
         const callback = (data) => {
             this.setState({
                 book: data
@@ -35,8 +36,8 @@ export class BookDetail extends React.Component {
         this.setState({
             editIndex: parseInt(e.target.dataset.key, 10)
         })
-        console.log(this.state.editIndex);
-        console.log(1);
+        // console.log(this.state.editIndex);
+        // console.log(1);
     }
 
     save = (e) => {
@@ -52,7 +53,9 @@ export class BookDetail extends React.Component {
     }
 
     createItem(idx) {
-        let content = this.state.book[idx];
+        let key = headers[idx];
+        key = key.replace(key[0], key[0].toLowerCase());
+        let content = this.state.book[key];
         let editIndex = this.state.editIndex;
         if (editIndex >= 0 && editIndex == idx) {
             content = (
@@ -75,12 +78,12 @@ export class BookDetail extends React.Component {
                 <div className="book_description">
                     <table>
                         <tbody>
-                        <tr>{this.createItem(0)}</tr>
                         <tr>{this.createItem(1)}</tr>
                         <tr>{this.createItem(2)}</tr>
                         <tr>{this.createItem(3)}</tr>
-                        <tr>{this.createItem(5)}</tr>
                         <tr>{this.createItem(4)}</tr>
+                        <tr>{this.createItem(6)}</tr>
+                        <tr>{this.createItem(5)}</tr>
                         </tbody>
                     </table>
                 </div>
@@ -90,12 +93,20 @@ export class BookDetail extends React.Component {
 }
 
 export class ButtonForPurchase extends React.Component {
+    handleClickCart = e => {
+        const username = window.location.href.split('/')[3];
+        const bookid = window.location.href.split('/')[5];
+        console.log(username + " " + bookid);
+        let data = {"username": username, "bookid": bookid};
+        console.log(data);
+        addToCart(data);
+    }
 
     render() {
         return (
             <div className="button_group">
                 <img src={purchaseIcon}/>
-                <img src={cartIcon}/>
+                <img src={cartIcon} onClick={this.handleClickCart}/>
             </div>
         );
     }

@@ -1,9 +1,8 @@
 import {postRequest} from "../utils/ajax";
 
 
-export const Login = (data, navigate) => {
+export const login = (data, navigate) => {
     let url = "http://localhost:8080/login";
-    console.log("UserService YES");
     const callback = (data) => {
         if (data.status >= 0) {
             let username = data.data.UserName;

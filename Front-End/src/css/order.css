@@ -1,0 +1,45 @@
+.orderExcel {
+
+}
+
+.order {
+    height: 120px;
+    padding: 10px 20px 0px 20px;
+    border: 0px solid whitesmoke;
+    border-bottom-width: 3px;
+
+}
+
+.orderID {
+    float: left;
+    margin-left: 10px;
+    margin-top: 40px;
+}
+
+.orderPrice {
+    float: left;
+    margin-left: 120px;
+    margin-top: 40px;
+    color: red;
+}
+
+.orderBtn {
+    float: right;
+    margin-right: 40px;
+    margin-top: 40px;
+
+}
+
+.orderBtn input {
+    border: 2px solid red;
+    border-radius: 28px;
+    background-color: transparent;
+    color: red;
+    padding: 6px 12px;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+}
+
+.orderBtn input:hover {
+    background-color: red;
+    color: white;
+}

@@ -33,7 +33,7 @@ export class HomeView extends React.Component {
 
     search(e) {
         let filterText = e.target.value.toLowerCase();
-        console.log(filterText);
+        //console.log(filterText);
         let dataSlice = this.state.books.filter(function (row) {
             return row.bookName.toString().toLowerCase().indexOf(filterText) > -1;
         });
@@ -42,7 +42,7 @@ export class HomeView extends React.Component {
 
     classify = e => {
         let filterText = e.target.dataset.type.replace("#", "").toLowerCase();
-        console.log(filterText);
+        //console.log(filterText);
         let dataSlice = this.state.books.filter(function (row) {
             return row.type.toString().toLowerCase().indexOf(filterText) > -1;
         });

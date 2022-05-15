@@ -1,6 +1,6 @@
 import React from "react";
 import "../css/login.css"
-import {Login} from "../services/userService";
+import {login} from "../services/userService";
 import {Link} from "react-router-dom";
 import {useNavigate} from "react-router";
 
@@ -14,7 +14,7 @@ export function LoginForm ()
         const password = document.getElementById("password").value;
         let userInfo = {"UserID" : account, "Password" : password};
         //console.log(userInfo);
-        Login(userInfo, navigate);
+        login(userInfo, navigate);
     }
 
 

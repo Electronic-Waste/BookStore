@@ -10,8 +10,8 @@ export function postRequest(url, json, callback)
         credential: "include"
     }
 
-    console.log("opts");
-    console.log(opts);
+    // console.log("opts");
+    // console.log(opts);
 
     fetch(url, opts)
         .then((response) => {
@@ -25,5 +25,21 @@ export function postRequest(url, json, callback)
         .catch((error) => {
             console.log(error);
         })
+}
+
+export function postRequest_noRet(url, json) {
+    let opts = {
+        method: "POST",
+        body: JSON.stringify(json),
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        credential: "include"
+    }
+
+    console.log("opts");
+    console.log(opts);
+
+    fetch(url, opts);
 }
 

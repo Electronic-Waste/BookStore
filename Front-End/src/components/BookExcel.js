@@ -14,7 +14,7 @@ export class BookExcel extends React.Component {
         let bookArr = this.props.books;
         let usrname = window.location.href.split('/')[3];
         let url = "/" + usrname + "/BookView/";
-        console.log(bookArr);
+        //console.log(bookArr);
         return(
             <div className="bookList">
                 {bookArr.map((book, idx) => (

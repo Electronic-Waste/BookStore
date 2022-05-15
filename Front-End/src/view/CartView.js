@@ -2,8 +2,9 @@ import React from "react";
 
 import {HeadBar} from "../components/HeadBar";
 import {SideBar} from "../components/SideBar";
-import {CartItem} from "../components/CartItem";
+import {CartExcel} from "../components/CartExcel";
 import "../css/cart.css"
+import {deleteAllCart} from "../services/cartService";
 
 export class CartView extends React.Component {
 
@@ -17,9 +18,7 @@ export class CartView extends React.Component {
                     <SideBar/>
                 </aside>
                 <section>
-                    <div className="cartItmExcel">
-                        <CartItem btnName="Buy Now"/>
-                    </div>
+                    <CartExcel/>
                 </section>
             </div>
         );
