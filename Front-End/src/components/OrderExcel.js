@@ -8,7 +8,7 @@ export class OrderExcel extends React.Component
         super(props);
 
         this.state = {
-            username: window.location.href.split('/')[3],
+            userId: window.location.href.split('/')[3],
             orders: []
         }
     }
@@ -22,10 +22,10 @@ export class OrderExcel extends React.Component
     }
 
     refresh = () => {
-        const data = {"username": this.state.username};
+        const data = {"userId": this.state.userId};
         const callback = (data) => {
             this.setState({
-                orders: data
+                orders: data.data.orders
             })
         }
         getOrders(data, callback);
@@ -35,15 +35,15 @@ export class OrderExcel extends React.Component
         return (
             <div className="orderExcel">
                 {this.state.orders.map((order, idx) =>
-                    <div className="order" key={order["orderID"]}>
+                    <div className="order" key={order["orderId"]}>
                         <div className="orderID">
-                            <h3>OrderID: {order["orderID"]}</h3>
+                            <h3>OrderID: {order["orderId"]}</h3>
                         </div>
                         <div className="orderPrice">
                             <h2>Total Price: ￥{order["price"]}</h2>
                         </div>
                         <div className="orderBtn">
-                            <input type="button" data-key={order["orderID"]}
+                            <input type="button" data-key={order["orderId"]}
                                    onClick={this.hanleClick} value="More Info"/>
                         </div>
                     </div>

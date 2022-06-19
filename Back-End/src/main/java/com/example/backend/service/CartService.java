@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface CartService {
 
-    boolean addBookToCart(String username, String bookid);
+    void addBookToCart(String userId, String bookId);
 
-    boolean deleteBookFromCart(String username, String bookid);
+    void deleteBookFromCart(String userId, String bookId);
 
-    boolean deleteAllBooksFromCart(String username);
+    void deleteAllBooksFromCart(String userId);
 
-    List<Cart> getCart(String username);
+    List<Cart> getCart(String userId);
 }

@@ -1,27 +1,31 @@
 package com.example.backend.serviceimpl;
 
 import com.example.backend.constant.Constant;
-import com.example.backend.entity.UserAuth;
+import com.example.backend.dao.BookDao;
+import com.example.backend.dao.UserDao;
+import com.example.backend.entity.Book;
+import com.example.backend.entity.Cart;
+import com.example.backend.entity.User;
 import com.example.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService{
+
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    UserDao userDao;
 
     @Override
-    public UserAuth checkUser(String userid, String password) {
-        String sql = "SELECT UserName, Role FROM user" +
-                " WHERE UserID=" + userid + " AND Password=" + password;
-        List<UserAuth> result = jdbcTemplate.query(sql, (rs, rowNum) -> new UserAuth(rs.getString(Constant.USERNAME), rs.getInt(Constant.USER_TYPE)));
-        if (!result.isEmpty())
-            return result.get(0);
-        else return null;
+    public User checkUser(String userid, String password) {
+        return userDao.checkUser(userid, password);
+    }
+
+    @Override
+    public User getUserById(String userid) {
+        return userDao.getUserById(userid);
     }
 }

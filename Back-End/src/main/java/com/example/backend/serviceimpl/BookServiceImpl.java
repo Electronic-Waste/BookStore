@@ -1,5 +1,6 @@
 package com.example.backend.serviceimpl;
 
+import com.example.backend.dao.BookDao;
 import com.example.backend.entity.Book;
 import com.example.backend.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,29 +13,17 @@ import java.util.List;
 
 @Service
 public class BookServiceImpl implements BookService {
+
     @Autowired
-    JdbcTemplate jdbcTemplate;
+    BookDao bookDao;
 
     @Override
     public Book findBookById(String id) {
-        String sql = "SELECT * FROM book WHERE BookID=" + id;
-        List<Book> books = jdbcTemplate.query(sql, ((rs, rowNum) -> new Book(
-                rs.getString("BookID"), rs.getString("BookName"), rs.getString("Author"),
-                rs.getString("Type"), rs.getDouble("Price"), rs.getString("Description"),
-                rs.getString("Inventory"), rs.getString("Image")
-        )));
-        if (!books.isEmpty()) return books.get(0);
-        else return null;
+       return bookDao.findOne(id);
     }
 
     @Override
     public List<Book> getBooks() {
-        String sql = "SELECT * FROM book";
-        List<Book> bookExcel = jdbcTemplate.query(sql, ((rs, rowNum) -> new Book(
-                rs.getString("BookID"), rs.getString("BookName"), rs.getString("Author"),
-                rs.getString("Type"), rs.getDouble("Price"), rs.getString("Description"),
-                rs.getString("Inventory"), rs.getString("Image")
-        )));
-        return bookExcel;
+       return bookDao.getBooks();
     }
 }

@@ -12,7 +12,7 @@ export function LoginForm ()
     const handleLogin = e => {
         const account = document.getElementById("account").value;
         const password = document.getElementById("password").value;
-        let userInfo = {"UserID" : account, "Password" : password};
+        let userInfo = {"userId" : account, "password" : password};
         //console.log(userInfo);
         login(userInfo, navigate);
     }

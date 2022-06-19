@@ -5,8 +5,8 @@ export const login = (data, navigate) => {
     let url = "http://localhost:8080/login";
     const callback = (data) => {
         if (data.status >= 0) {
-            let username = data.data.UserName;
-            let navigateUrl = "/" + username + "/HomeView";
+            let userId = data.data.userId;
+            let navigateUrl = "/" + userId + "/HomeView";
             navigate(navigateUrl);
         }
         else {

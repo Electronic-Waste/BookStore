@@ -1,10 +1,11 @@
 package com.example.backend.service;
 
-import com.example.backend.entity.UserAuth;
-import org.springframework.stereotype.Component;
+import com.example.backend.entity.User;
 
 public interface UserService {
 
-    UserAuth checkUser(String userid, String password);
+    User checkUser(String userid, String password);
+
+    User getUserById(String userid);
 
 }

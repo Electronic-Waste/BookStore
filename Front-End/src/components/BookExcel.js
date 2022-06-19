@@ -12,14 +12,14 @@ export class BookExcel extends React.Component {
 
     render() {
         let bookArr = this.props.books;
-        let usrname = window.location.href.split('/')[3];
-        let url = "/" + usrname + "/BookView/";
+        let userId = window.location.href.split('/')[3];
+        let url = "/" + userId + "/BookView/";
         //console.log(bookArr);
         return(
             <div className="bookList">
                 {bookArr.map((book, idx) => (
-                    <div className="bookDisplay" key={book.bookID}>
-                        <Link to={url + (book.bookID)}>
+                    <div className="bookDisplay" key={book.bookId}>
+                        <Link to={url + (book.bookId)}>
                             <img src={book.image}/>
                         </Link>
                     </div>

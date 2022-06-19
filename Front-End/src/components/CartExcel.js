@@ -9,7 +9,7 @@ export class CartExcel extends React.Component {
         super(props);
 
         this.state = {
-            username: window.location.href.split('/')[3],
+            userId: window.location.href.split('/')[3],
             carts: []
         }
     }
@@ -19,16 +19,16 @@ export class CartExcel extends React.Component {
     }
 
     refreshPage() {
-        let data = {"username": this.state.username};
+        let data = {"userId": this.state.userId};
         const callback = (data) => {
-            this.setState({carts: data});
+            this.setState({carts: data.data.carts});
         }
         getCart(data, callback);
     }
 
     hanleClick = (e) => {
-        const bookid = e.target.dataset.key;
-        const data = {"bookid": bookid, "username": this.state.username};
+        const bookId = e.target.dataset.key;
+        const data = {"bookId": bookId, "userId": this.state.userId};
         createOrder(data);
         deleteCart(data);
         this.refreshPage();
@@ -36,28 +36,28 @@ export class CartExcel extends React.Component {
 
     buyAll = (e) => {
         e.preventDefault();
-        const data = {"username": this.state.username};
+        const data = {"userId": this.state.userId};
         createMultipleOrders(data);
         deleteAllCart(data);
         this.refreshPage();
     }
 
     render() {
-        const basicRoute = "/" + this.state.username + "/BookView";
+        const basicRoute = "/" + this.state.userId + "/BookView";
         return(
             <div className="cartItemExcel">
                 <div className="cartButtonArea">
                     <input type="button" value="Buy All" onClick={this.buyAll}/>
                 </div>
                 {this.state.carts.map((cart, idx) =>
-                    <div className="cartItem" data-key={cart.book["bookID"]}>
+                    <div className="cartItem" data-key={cart.book["bookId"]}>
                         <div className="cartItemImage">
-                            <Link to={basicRoute + "/" + cart.book["bookID"]}>
+                            <Link to={basicRoute + "/" + cart.book["bookId"]}>
                                 <img src={cart.book["image"]}/>
                             </Link>
                         </div>
                         <div className="cartItemName">
-                            <h3>{cart.book["bookName"]}</h3>
+                            <h3>{cart.book["bookname"]}</h3>
                         </div>
                         <div className="cartItemPrice">
                             <h2>￥{cart.book["price"] * cart.num}</h2>
@@ -66,7 +66,7 @@ export class CartExcel extends React.Component {
                             <h2>{cart.num}</h2>
                         </div>
                         <div className="cartItemBtn">
-                            <input type="button" data-key={cart.book["bookID"]}
+                            <input type="button" data-key={cart.book["bookId"]}
                                    onClick={this.hanleClick} value="Buy Now"/>
                         </div>
                     </div>

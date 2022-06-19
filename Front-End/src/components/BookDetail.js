@@ -94,10 +94,10 @@ export class BookDetail extends React.Component {
 
 export class ButtonForPurchase extends React.Component {
     handleClickCart = e => {
-        const username = window.location.href.split('/')[3];
-        const bookid = window.location.href.split('/')[5];
-        console.log(username + " " + bookid);
-        let data = {"username": username, "bookid": bookid};
+        const userId = window.location.href.split('/')[3];
+        const bookId = window.location.href.split('/')[5];
+        console.log(userId + " " + bookId);
+        let data = {"userId": userId, "bookId": bookId};
         console.log(data);
         addToCart(data);
     }

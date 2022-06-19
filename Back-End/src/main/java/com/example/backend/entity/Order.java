@@ -1,18 +1,20 @@
 package com.example.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Data
+@Entity
+@Table(name = "orders")
+@JsonIgnoreProperties(value = {"handler","hibernateLazyInitializer","fieldHandler"})
 public class Order {
-    private String UserID;
-    private String OrderID;
-    private Double Price;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String orderId;
+    private String userId;
+    private Double price;
 
-    public Order(String userID, String orderID, Double Price) {
-        this.UserID = userID;
-        this.OrderID = orderID;
-        this.Price = Price;
-    }
 }

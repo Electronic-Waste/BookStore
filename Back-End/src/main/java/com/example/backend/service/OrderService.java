@@ -3,15 +3,14 @@ package com.example.backend.service;
 import com.example.backend.entity.Book;
 import com.example.backend.entity.Order;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface OrderService {
-    void createOneOrder(String username, String bookid);
+    void createOneOrder(String userId, String bookId);
 
-    void createMultipleOrders(String username);
+    void createMultipleOrders(String userId);
 
-    List<Order> getOrders(String username);
+    List<Order> getOrders(String userId);
 
-    List<Book> getOrderItems(String orderid);
+    List<Book> getOrderItemsBooks(int orderId);
 }
