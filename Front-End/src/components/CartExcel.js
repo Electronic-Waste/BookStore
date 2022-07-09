@@ -3,6 +3,7 @@ import "../css/cart.css"
 import {deleteAllCart, deleteCart, getCart} from "../services/cartService";
 import {Link} from "react-router-dom";
 import {createMultipleOrders, createOrder} from "../services/orderService";
+import {Button} from "antd";
 
 export class CartExcel extends React.Component {
     constructor(props) {
@@ -46,9 +47,6 @@ export class CartExcel extends React.Component {
         const basicRoute = "/" + this.state.userId + "/BookView";
         return(
             <div className="cartItemExcel">
-                <div className="cartButtonArea">
-                    <input type="button" value="Buy All" onClick={this.buyAll}/>
-                </div>
                 {this.state.carts.map((cart, idx) =>
                     <div className="cartItem" data-key={cart.book["bookId"]}>
                         <div className="cartItemImage">
@@ -60,7 +58,7 @@ export class CartExcel extends React.Component {
                             <h3>{cart.book["bookname"]}</h3>
                         </div>
                         <div className="cartItemPrice">
-                            <h2>￥{cart.book["price"] * cart.num}</h2>
+                            <h2 style={{color: "red"}}>￥{cart.book["price"] * cart.num}</h2>
                         </div>
                         <div className="cartItemNum">
                             <h2>{cart.num}</h2>
@@ -71,6 +69,9 @@ export class CartExcel extends React.Component {
                         </div>
                     </div>
                 )}
+                <div className="cartButtonArea">
+                    <Button type="primary" onClick={this.buyAll} danger>Buy All!</Button>
+                </div>
             </div>
             )
     }

@@ -42,8 +42,7 @@
     float: bottom;
 }
 
-.button_group img {
-    width: 60px;
-    margin-left: 25%;
+.button_group Button {
+    margin-left: 40%;
     margin-top: 20px;
 }

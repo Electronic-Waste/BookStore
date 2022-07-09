@@ -18,8 +18,8 @@ export function postRequest(url, json, callback)
             return response.json();
         })
         .then((data) => {
-            console.log("Ajax function:\n");
-            console.log(data);
+            // console.log("Ajax function:\n");
+            // console.log(data);
             callback(data);
         })
         .catch((error) => {
@@ -36,10 +36,8 @@ export function postRequest_noRet(url, json) {
         },
         credential: "include"
     }
-
-    console.log("opts");
-    console.log(opts);
-
+    // console.log("opts");
+    // console.log(opts);
     fetch(url, opts);
 }
 

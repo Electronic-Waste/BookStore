@@ -5,13 +5,13 @@ import com.example.backend.entity.Cart;
 import java.util.List;
 
 public interface CartDao {
-    List<Cart> getCartByUserId(String userId);
+    List<Cart> getCartByUserId(int userId);
 
-    Cart getCartByUserIdAndBookId(String userId, String bookId);
+    Cart getCartByUserIdAndBookId(int userId, int bookId);
 
     void save(Cart cart);
 
-    void deleteByUserId(String userId);
+    void deleteByUserId(int userId);
 
-    void deleteByUserIdAndBookId(String userId, String bookId);
+    void deleteByUserIdAndBookId(int userId, int bookId);
 }

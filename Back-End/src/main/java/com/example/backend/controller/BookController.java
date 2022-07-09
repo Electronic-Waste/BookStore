@@ -23,7 +23,23 @@ public class BookController {
 
     @RequestMapping("/getBook")
     public Book getBook(@RequestBody Map<String, String> params){
-        String id = params.get("id");
+        int id = Integer.parseInt(params.get("id"));
         return bookService.findBookById(id);
+    }
+
+    @RequestMapping("/addBook")
+    public void addBook(@RequestBody Map<String, String> params) {
+        bookService.addBook(params);
+    }
+
+    @RequestMapping("/updateBook")
+    public void updateBook(@RequestBody Map<String, String> params) {
+        bookService.updateBook(params);
+    }
+
+    @RequestMapping("/deleteBook")
+    public void deleteBook(@RequestBody Map<String, String> params) {
+        int id = Integer.parseInt(params.get("id"));
+        bookService.deleteBookById(id);
     }
 }

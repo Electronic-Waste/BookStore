@@ -15,12 +15,22 @@ public class BookDaoImpl implements BookDao {
     private BookRepository bookRepository;
 
     @Override
-    public Book findOne(String id) {
+    public Book findOne(int id) {
         return bookRepository.getById(id);
     }
 
     @Override
     public List<Book> getBooks() {
         return bookRepository.getBooks();
+    }
+
+    @Override
+    public void save(Book book) {
+        bookRepository.save(book);
+    }
+
+    @Override
+    public void deleteById(int id) {
+        bookRepository.deleteById(id);
     }
 }

@@ -24,7 +24,7 @@ public class CartServiceImpl implements CartService {
     BookDao bookDao;
 
     @Override
-    public void addBookToCart(String userId, String bookId) {
+    public void addBookToCart(int userId, int bookId) {
         Cart cart = cartDao.getCartByUserIdAndBookId(userId, bookId);
         if (cart != null) {
             int num = cart.getNum();
@@ -45,17 +45,36 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public void deleteBookFromCart(String userId, String bookId) {
+    public void deleteBookFromCart(int userId, int bookId) {
+        /* Update inventory */
+        Cart cart = cartDao.getCartByUserIdAndBookId(userId, bookId);
+        Book book = bookDao.findOne(bookId);
+        int num = cart.getNum();
+        int totalNum = book.getInventory();
+        book.setInventory(totalNum - num);
+        bookDao.save(book);
+
+        /* Delete cart item */
         cartDao.deleteByUserIdAndBookId(userId, bookId);
     }
 
     @Override
-    public void deleteAllBooksFromCart(String userId) {
+    public void deleteAllBooksFromCart(int userId) {
+        /* Update inventory */
+        List<Cart> cartList = cartDao.getCartByUserId(userId);
+        for (int i = 0; i < cartList.size(); ++i) {
+            Cart cart = cartList.get(i);
+            Book book = bookDao.findOne(cart.getBook().getBookId());
+            int num = cart.getNum();
+            int totalNum = book.getInventory();
+            book.setInventory(totalNum - num);
+            bookDao.save(book);
+        }
         cartDao.deleteByUserId(userId);
     }
 
     @Override
-    public List<Cart> getCart(String userId) {
+    public List<Cart> getCart(int userId) {
         return cartDao.getCartByUserId(userId);
     }
 }

@@ -36,7 +36,7 @@ public class OrderServiceImpl implements OrderService {
     OrderItemDao orderItemDao;
 
     @Override
-    public void createOneOrder(String userId, String bookId){
+    public void createOneOrder(int userId, int bookId){
         /* Get Book */
         Cart cart = cartDao.getCartByUserIdAndBookId(userId, bookId);
         Book book = bookDao.findOne(bookId);
@@ -54,12 +54,13 @@ public class OrderServiceImpl implements OrderService {
         OrderItem orderItem = new OrderItem();
         orderItem.setBook(book);
         orderItem.setNum(cart.getNum());
+        orderItem.setPrice(cart.getPrice());
         orderItem.setOrderId(newOrder.getOrderId());
         orderItemDao.save(orderItem);
 
     }
 
-    public void createMultipleOrders(String userId){
+    public void createMultipleOrders(int userId){
         /* Get books */
         List<Cart> cartList = cartDao.getCartByUserId(userId);
         Double totalPrice = 0.0;
@@ -79,12 +80,13 @@ public class OrderServiceImpl implements OrderService {
             OrderItem orderItem = new OrderItem();
             orderItem.setBook(cartList.get(i).getBook());
             orderItem.setNum(cartList.get(i).getNum());
+            orderItem.setPrice(cartList.get(i).getPrice());
             orderItem.setOrderId(newOrder.getOrderId());
             orderItemDao.save(orderItem);
         }
     }
 
-    public List<Order> getOrders(String userId){
+    public List<Order> getOrders(int userId){
         return orderDao.getOrdersByUserId(userId);
     }
 

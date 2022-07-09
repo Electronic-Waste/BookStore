@@ -15,7 +15,7 @@ public class OrderDaoImpl implements OrderDao {
     OrderRepository orderRepository;
 
     @Override
-    public List<Order> getOrdersByUserId(String userId) {
+    public List<Order> getOrdersByUserId(int userId) {
         return orderRepository.getOrdersByUserId(userId);
     }
 

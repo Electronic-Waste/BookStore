@@ -24,14 +24,14 @@ public class CartController {
 
     @RequestMapping("/addtocart")
     public void addToCart(@RequestBody Map<String, String> params) {
-        String userId = params.get("userId");
-        String bookId = params.get("bookId");
+        int userId = Integer.parseInt(params.get("userId"));
+        int bookId = Integer.parseInt(params.get("bookId"));
         cartService.addBookToCart(userId, bookId);
     }
 
     @RequestMapping("/getcart")
     public Msg getCart(@RequestBody Map<String, String> params) {
-        String userId = params.get("userId");
+        int userId = Integer.parseInt(params.get("userId"));
         List<Cart> result = cartService.getCart(userId);
         if (result != null) {
             JSONObject data = new JSONObject();
@@ -45,14 +45,14 @@ public class CartController {
 
     @RequestMapping("/delfromcart")
     public void delFromCart(@RequestBody Map<String, String> params) {
-        String userId = params.get("userId");
-        String bookId = params.get("bookId");
+        int userId = Integer.parseInt(params.get("userId"));
+        int bookId = Integer.parseInt(params.get("bookId"));
         cartService.deleteBookFromCart(userId, bookId);
     }
 
     @RequestMapping("delallfromcart")
     public void delAllFromCart(@RequestBody Map<String, String> params) {
-        String userId= params.get("userId");
+        int userId= Integer.parseInt(params.get("userId"));
         cartService.deleteAllBooksFromCart(userId);
     }
 }

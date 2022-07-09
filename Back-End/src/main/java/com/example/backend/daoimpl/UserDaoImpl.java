@@ -14,12 +14,27 @@ public class UserDaoImpl implements UserDao {
     UserRepository userRepository;
 
     @Override
-    public User checkUser(String username, String password) {
-        return userRepository.checkUser(username, password);
+    public User checkUser(int userid, String password) {
+        return userRepository.checkUser(userid, password);
     }
 
     @Override
-    public User getUserById(String userid) {
+    public User getUserById(int userid) {
         return userRepository.getById(userid);
+    }
+
+    @Override
+    public List<User> getUsers() {
+        return userRepository.getUsers();
+    }
+
+    @Override
+    public List<User> getRepeatUsers(String username) {
+        return userRepository.getRepeatUsers(username);
+    }
+
+    @Override
+    public void save(User user) {
+        userRepository.save(user);
     }
 }

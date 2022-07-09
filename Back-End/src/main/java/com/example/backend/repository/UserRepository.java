@@ -7,8 +7,13 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface UserRepository extends JpaRepository<User, String> {
+public interface UserRepository extends JpaRepository<User, Integer> {
     @Query("select u from User u where u.userId = :userid and u.password = :password")
-    User checkUser(@Param("userid") String userid, @Param("password") String password);
+    User checkUser(@Param("userid") Integer userid, @Param("password") String password);
 
+    @Query("select u from User u")
+    List<User> getUsers();
+
+    @Query("select u from User u where u.username = :username")
+    List<User> getRepeatUsers(@Param("username") String username);
 }

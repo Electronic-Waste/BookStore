@@ -14,3 +14,8 @@ export const getOrders = (data, callback) => {
     const url = "http://localhost:8080/getorders";
     postRequest(url, data, callback);
 }
+
+export const getOrderItems = (data, callback) => {
+    const url = "http://localhost:8080/getorderitems";
+    postRequest(url, data, callback);
+}

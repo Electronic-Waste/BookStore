@@ -7,7 +7,7 @@ import {BookCarousel} from "../components/Carousel";
 import {BookExcel} from "../components/BookExcel";
 import {getBooks} from "../services/bookService";
 
-export const headers = ["BookID", "BookName", "Author", "Type", "Price", "Description", "Inventory", "Image"];
+export const headers = ["bookId", "bookname", "author", "type", "price", "description", "inventory", "image"];
 
 export class HomeView extends React.Component {
     constructor(props) {
@@ -32,19 +32,11 @@ export class HomeView extends React.Component {
 
 
     search(e) {
-        let filterText = e.target.value.toLowerCase();
-        //console.log(filterText);
+        let filterText = document.getElementById("search-bar").value;
+        // console.log(filterText);
+        // console.log(this.state.books);
         let dataSlice = this.state.books.filter(function (row) {
-            return row.bookName.toString().toLowerCase().indexOf(filterText) > -1;
-        });
-        this.setState({booksOnDisplay: dataSlice});
-    }
-
-    classify = e => {
-        let filterText = e.target.dataset.type.replace("#", "").toLowerCase();
-        //console.log(filterText);
-        let dataSlice = this.state.books.filter(function (row) {
-            return row.type.toString().toLowerCase().indexOf(filterText) > -1;
+            return row.bookname.toString().toLowerCase().indexOf(filterText) > -1;
         });
         this.setState({booksOnDisplay: dataSlice});
     }
@@ -61,7 +53,6 @@ export class HomeView extends React.Component {
                 <section>
                     <div className="up_area">
                         <SearchBox search={this.search}/>
-                        <ClassifyBox classify={this.classify}/>
                     </div>
                     <div className="mid_area">
                         <BookCarousel/>

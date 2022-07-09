@@ -2,6 +2,7 @@ import React from "react";
 
 import "../css/home.css"
 import searchIcon from "../assets/search.svg"
+import Search from "antd/es/input/Search";
 
 export class SearchBox extends React.Component {
     constructor(props) {
@@ -11,12 +12,14 @@ export class SearchBox extends React.Component {
     render() {
         return (
             <div className="search">
-                <input
-                    className="search_box" type="search"
-                    placeholder="Find some books there"
-                    onChange={this.props.search}
+                <Search
+                    id = "search-bar"
+                    placeholder="Input the book name"
+                    allowClear
+                    enterButton="Search"
+                    size="large"
+                    onSearch={this.props.search}
                 />
-                <img className="search_btn" src={searchIcon}/>
             </div>
         );
     }

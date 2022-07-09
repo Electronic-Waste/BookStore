@@ -16,6 +16,7 @@ public class OrderItem implements Serializable {
     private int orderitemId;
     private String orderId;
     private int num;
+    private double price;
     
     @ManyToOne
     @JoinColumn(name = "bookId")

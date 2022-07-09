@@ -6,6 +6,10 @@ import {CartView} from "./view/CartView";
 import {OrderView} from "./view/OrderView";
 import {Router, Route, Routes} from "react-router"
 import {BrowserRouter} from "react-router-dom"
+import {AddBookForm} from "./components/AddBookForm";
+import {AddBookView} from "./view/AddBookView";
+import {UserManageView} from "./view/UserManageView";
+import {RegisterView} from "./view/RegisterView";
 
 export class BasicRoute extends React.Component{
     constructor(props) {
@@ -16,11 +20,14 @@ export class BasicRoute extends React.Component{
         return (
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<LoginView/>}></Route>
-                    <Route path="/:userid/HomeView" element={<HomeView/>}></Route>
-                    <Route path="/:userid/BookView/:name" element={<BookView/>}></Route>
-                    <Route path="/:userid/CartView" element={<CartView/>}></Route>
-                    <Route path="/:userid/OrderView" element={<OrderView/>}></Route>
+                    <Route path="/" element={<LoginView/>}/>
+                    <Route path="/register" element={<RegisterView/>}/>
+                    <Route path="/:userid/HomeView" element={<HomeView/>}/>
+                    <Route path="/:userid/BookView/:name" element={<BookView/>}/>
+                    <Route path="/:userid/CartView" element={<CartView/>}/>
+                    <Route path="/:userid/OrderView" element={<OrderView/>}/>
+                    <Route path="/:userid/AddBookView" element={<AddBookView/>}/>
+                    <Route path="/:userid/ManageUsersView" element={<UserManageView/>}/>
                 </Routes>
             </BrowserRouter>
         );

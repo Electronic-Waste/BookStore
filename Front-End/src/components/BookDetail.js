@@ -3,9 +3,11 @@ import React from "react";
 import "../css/bookDetail.css"
 import purchaseIcon from "../assets/purchase.svg"
 import cartIcon from "../assets/cart.svg"
+import {Button} from "antd";
 import {headers} from "../view/HomeView";
-import {getBook} from "../services/bookService";
+import {deleteBook, getBook} from "../services/bookService";
 import {addToCart} from "../services/cartService";
+import {postRequest, postRequest_noRet} from "../utils/ajax";
 
 export class BookDetail extends React.Component {
     constructor(props) {
@@ -44,12 +46,16 @@ export class BookDetail extends React.Component {
         e.preventDefault();
         let input = e.target.firstChild;
         let editIndex = this.state.editIndex;
-        let data = this.state.dataSource;
-        data[editIndex] = input.value;
+        let data = this.state.book;
+        let editKey = headers[editIndex];
+        data[editKey] = input.value;
         this.setState({
             editIndex: -1,
-            dataSource: data
+            book: data
         });
+        console.log(this.state.book);
+        let postUrl = "http://localhost:8080/updateBook";
+        postRequest_noRet(postUrl, data);
     }
 
     createItem(idx) {
@@ -93,6 +99,28 @@ export class BookDetail extends React.Component {
 }
 
 export class ButtonForPurchase extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state={
+            isSuper: 0       // Super: 1, else: 0
+        }
+    }
+
+    componentDidMount() {
+        let id = window.location.href.split('/')[3];
+        let data = {"userId": id};
+        let url = "http://localhost:8080/getUser";
+        const callback = (data) => {
+            this.setState({
+                isSuper: data.data.role
+            })
+        }
+        postRequest(url, data, callback);
+
+    }
+
+
     handleClickCart = e => {
         const userId = window.location.href.split('/')[3];
         const bookId = window.location.href.split('/')[5];
@@ -102,13 +130,27 @@ export class ButtonForPurchase extends React.Component {
         addToCart(data);
     }
 
+    handleClickDelete = e => {
+        const bookId = window.location.href.split('/')[5];
+        deleteBook(bookId);
+    }
+
     render() {
-        return (
-            <div className="button_group">
-                <img src={purchaseIcon}/>
-                <img src={cartIcon} onClick={this.handleClickCart}/>
-            </div>
-        );
+        if (this.state.isSuper == 0) {
+            return (
+                <div className="button_group">
+                    <Button type="primary" onClick={this.handleClickCart} danger>Add to cart!</Button>
+                </div>
+            );
+        }
+        else {
+            return (
+                <div className="button_group">
+                    <Button type="primary" onClick={this.handleClickDelete} danger>Delete Book!</Button>
+                </div>
+            );
+        }
+
     }
 }
 

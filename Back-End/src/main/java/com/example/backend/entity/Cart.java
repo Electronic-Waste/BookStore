@@ -13,7 +13,7 @@ import java.io.Serializable;
 public class Cart implements Serializable {
     @Id
     private int cartId;
-    private String userId;
+    private int userId;
     private Double price;
     private int num;
 

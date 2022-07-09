@@ -27,21 +27,21 @@ public class OrderController {
 
     @RequestMapping("/oneorder")
     public void createOrder(@RequestBody Map<String, String> params) {
-        String userId = params.get("userId");
-        String bookId = params.get("bookId");
+        int userId = Integer.parseInt(params.get("userId"));
+        int bookId = Integer.parseInt(params.get("bookId"));
         System.out.println(bookId);
         orderService.createOneOrder(userId, bookId);
     }
 
     @RequestMapping("/multipleorders")
     public void createMultipleOrders(@RequestBody Map<String, String> params) {
-        String userId = params.get("userId");
+        int userId = Integer.parseInt(params.get("userId"));
         orderService.createMultipleOrders(userId);
     }
 
     @RequestMapping("/getorders")
     public Msg getOrders(@RequestBody Map<String, String> params) {
-        String userId = params.get("userId");
+        int userId = Integer.parseInt(params.get("userId"));
         List<Order> result = orderService.getOrders(userId);
         if (result != null) {
             JSONObject data = new JSONObject();

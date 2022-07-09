@@ -13,9 +13,10 @@ import java.util.List;
 @JsonIgnoreProperties(value = {"handler","hibernateLazyInitializer","fieldHandler"})
 public class User {
     @Id
-    private String userId;
+    private int userId;
     private String username;
     private String password;
+    private String email;
     private int role;
 
 }

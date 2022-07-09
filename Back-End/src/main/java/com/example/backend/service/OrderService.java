@@ -6,11 +6,11 @@ import com.example.backend.entity.Order;
 import java.util.List;
 
 public interface OrderService {
-    void createOneOrder(String userId, String bookId);
+    void createOneOrder(int userId, int bookId);
 
-    void createMultipleOrders(String userId);
+    void createMultipleOrders(int userId);
 
-    List<Order> getOrders(String userId);
+    List<Order> getOrders(int userId);
 
     List<Book> getOrderItemsBooks(int orderId);
 }

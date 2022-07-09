@@ -60,6 +60,12 @@ aside {
     height: 30px;
 }
 
+.sideBar h3 {
+    margin-left: 20px;
+    margin-top: 20px;
+    height: 30px;
+}
+
 section {
     float: left;
     width: 800px;
@@ -81,46 +87,42 @@ section {
 
 .search {
     position: absolute;
-    //transform: translate(-50%, -50%);
-    background: #2f3640;
     margin-top: 28px;
     margin-left: 60px;
-    height: 28px;
-    border-radius: 28px;
-    padding: 8px;
-    float: left;
+    height: 60px;
+    width: 640px;
 }
 
-.search_box {
-    border: none;
-    background: none;
-    outline: none;
-    float: left;
-    padding: 0;
-    color: white;
-    font-size: 16px;
-    transition: 0.4s;
-    line-height: 28px;
-    width: 0;
-}
+/*.search_box {*/
+/*    border: none;*/
+/*    background: none;*/
+/*    outline: none;*/
+/*    float: left;*/
+/*    padding: 0;*/
+/*    color: white;*/
+/*    font-size: 16px;*/
+/*    transition: 0.4s;*/
+/*    line-height: 28px;*/
+/*    width: 0;*/
+/*}*/
 
-.search_btn {
-    width: 28px;
-    height: 28px;
-}
+/*.search_btn {*/
+/*    width: 28px;*/
+/*    height: 28px;*/
+/*}*/
 
-.search input::-webkit-search-cancel-button{
-    display: none;
-}
+/*.search input::-webkit-search-cancel-button{*/
+/*    display: none;*/
+/*}*/
 
-.search:hover > .search_box {
-    width: 540px;
-    padding: 0 6px;
-}
+/*.search:hover > .search_box {*/
+/*    width: 540px;*/
+/*    padding: 0 6px;*/
+/*}*/
 
-.search:hover > .classifyItem button{
-    visibility: hidden;
-}
+/*.search:hover > .classifyItem button{*/
+/*    visibility: hidden;*/
+/*}*/
 /*This part is the stylesheet for searchBar*/
 
 /*This part is for classifyBar*/
