@@ -16,4 +16,8 @@ public interface UserService {
     List<User> getUsers();
 
     void banUser(int userid, int role);
+
+    void startCountTime();
+
+    long finishCountTime();
 }

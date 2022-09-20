@@ -10,6 +10,8 @@ import com.example.backend.utils.msgutils.Msg;
 import com.example.backend.utils.msgutils.MsgCode;
 import com.example.backend.utils.msgutils.MsgUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
 import org.springframework.data.relational.core.sql.In;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,10 +19,16 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+//@Scope("singleton")
 public class UserController {
     @Autowired
     UserService userService;
 
+    /**
+     * Decide whether this user can log in according to userId & password.
+     * @param params composed of 'userId', 'password'.
+     * @return user's info: if login successfully; LOGIN_USER_ERROR: otherwise.
+     */
     @RequestMapping("/login")
     public Msg login(@RequestBody Map<String, String> params) {
         System.out.println("BackEnd YES");
@@ -35,11 +43,27 @@ public class UserController {
             data.put(Constant.USERNAME, result.getUsername());
             data.put(Constant.USER_TYPE, result.getRole());
 
+            userService.startCountTime();   // start count time
+
             return MsgUtil.makeMsg(MsgCode.SUCCESS, MsgUtil.SUCCESS_MSG, data);
         }
         else {
             return MsgUtil.makeMsg(MsgCode.LOGIN_USER_ERROR);
         }
+    }
+
+    /**
+     * User logout and end counting time
+     * @return online time: long.
+     */
+    @RequestMapping("/logout")
+    public Msg logout() {
+        System.out.println("Logout");
+        long interval = userService.finishCountTime();  // finish count time
+        JSONObject data = new JSONObject();
+        data.put("interval", interval);
+        System.out.println("Interval" + interval);
+        return MsgUtil.makeMsg(MsgCode.SUCCESS, MsgUtil.SUCCESS_MSG, data);
     }
 
     @RequestMapping("/getUser")

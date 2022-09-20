@@ -8,17 +8,21 @@ import com.example.backend.entity.Cart;
 import com.example.backend.entity.User;
 import com.example.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 @Service
+//@Scope("singleton")
 public class UserServiceImpl implements UserService{
-
     @Autowired
     UserDao userDao;
+
+    private Date startTime;
 
     @Override
     public User checkUser(int userid, String password) {
@@ -60,5 +64,16 @@ public class UserServiceImpl implements UserService{
         User user = userDao.getUserById(userid);
         user.setRole(role);
         userDao.save(user);
+    }
+
+    @Override
+    public void startCountTime() {
+        startTime = new Date();
+    }
+
+    @Override
+    public long finishCountTime() {
+        Date endTime = new Date();
+        return (endTime.getTime() - startTime.getTime()) / 1000;
     }
 }
