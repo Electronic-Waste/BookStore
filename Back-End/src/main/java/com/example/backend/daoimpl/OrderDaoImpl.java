@@ -5,6 +5,7 @@ import com.example.backend.entity.Order;
 import com.example.backend.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,7 +21,9 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public void save(Order order) {
-        orderRepository.save(order);
+    @Transactional
+    public int save(Order order) {
+//        int i = 10 / 0;         // error test
+        return orderRepository.save(order).getOrderId();
     }
 }

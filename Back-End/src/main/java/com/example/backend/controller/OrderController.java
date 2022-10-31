@@ -12,6 +12,7 @@ import com.example.backend.utils.msgutils.Msg;
 import com.example.backend.utils.msgutils.MsgCode;
 import com.example.backend.utils.msgutils.MsgUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,18 +26,28 @@ public class OrderController {
     @Autowired
     OrderService orderService;
 
+    @Autowired
+    KafkaTemplate<String, String> kafkaTemplate;
+
     @RequestMapping("/oneorder")
     public void createOrder(@RequestBody Map<String, String> params) {
-        int userId = Integer.parseInt(params.get("userId"));
-        int bookId = Integer.parseInt(params.get("bookId"));
-        System.out.println(bookId);
-        orderService.createOneOrder(userId, bookId);
+//        int userId = Integer.parseInt(params.get("userId"));
+//        int bookId = Integer.parseInt(params.get("bookId"));
+//        System.out.println(bookId);
+//        orderService.createOneOrder(userId, bookId);
+        JSONObject object = new JSONObject();
+        object.put("userId", params.get("userId"));
+        object.put("bookId", params.get("bookId"));
+        kafkaTemplate.send("createOrder", "key", object.toJSONString());
     }
 
     @RequestMapping("/multipleorders")
     public void createMultipleOrders(@RequestBody Map<String, String> params) {
-        int userId = Integer.parseInt(params.get("userId"));
-        orderService.createMultipleOrders(userId);
+//        int userId = Integer.parseInt(params.get("userId"));
+//        orderService.createMultipleOrders(userId);
+        JSONObject object = new JSONObject();
+        object.put("userId", params.get("userId"));
+        kafkaTemplate.send("createOrder", "key", object.toJSONString());
     }
 
     @RequestMapping("/getorders")

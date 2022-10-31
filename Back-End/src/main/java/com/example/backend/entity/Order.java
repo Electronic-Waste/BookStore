@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String orderId;
+    private int orderId;
     private int userId;
     private Double price;
 

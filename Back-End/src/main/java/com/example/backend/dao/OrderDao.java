@@ -7,5 +7,5 @@ import java.util.List;
 public interface OrderDao {
     List<Order> getOrdersByUserId(int userId);
 
-    void save(Order order);
+    int save(Order order);
 }

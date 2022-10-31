@@ -14,7 +14,7 @@ public class OrderItem implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int orderitemId;
-    private String orderId;
+    private int orderId;
     private int num;
     private double price;
     
