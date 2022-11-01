@@ -15,6 +15,7 @@ import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -34,8 +35,10 @@ public class OrderServiceImpl implements OrderService {
     BookDao bookDao;
     @Autowired
     OrderItemDao orderItemDao;
+    @Autowired
+    CartService cartService;
 
-    @Override
+    @Transactional
     public void createOneOrder(int userId, int bookId){
         /* Get Book */
         Cart cart = cartDao.getCartByUserIdAndBookId(userId, bookId);
@@ -46,44 +49,61 @@ public class OrderServiceImpl implements OrderService {
         Order order = new Order();
         order.setUserId(userId);
         order.setPrice(totalPrice);
-        orderDao.save(order);
+        int orderId = orderDao.save(order);
+
+        /* Delete Cart */
+        cartService.deleteBookFromCart(userId, bookId);
 
         /* Create OrderItem */
-        List<Order> orderList = orderDao.getOrdersByUserId(userId);
-        Order newOrder = orderList.get(orderList.size() - 1);
-        OrderItem orderItem = new OrderItem();
-        orderItem.setBook(book);
-        orderItem.setNum(cart.getNum());
-        orderItem.setPrice(cart.getPrice());
-        orderItem.setOrderId(newOrder.getOrderId());
-        orderItemDao.save(orderItem);
+        try {
+            OrderItem orderItem = new OrderItem();
+            orderItem.setBook(book);
+            orderItem.setNum(cart.getNum());
+            orderItem.setPrice(cart.getPrice());
+            orderItem.setOrderId(orderId);
+            orderItemDao.save(orderItem);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
+    @Transactional
     public void createMultipleOrders(int userId){
         /* Get books */
         List<Cart> cartList = cartDao.getCartByUserId(userId);
         Double totalPrice = 0.0;
         for (int i = 0; i < cartList.size(); ++i)
             totalPrice += cartList.get(i).getPrice();
+        System.out.println("totalprice: " + totalPrice);
+//        int num = 10 /0;  // error test
 
         /* Create Order */
         Order order = new Order();
         order.setUserId(userId);
         order.setPrice(totalPrice);
-        orderDao.save(order);
+        int orderId = orderDao.save(order);
+
+        /* Delete Cart */
+        cartService.deleteAllBooksFromCart(userId);
 
         /* Create OrderItem */
-        List<Order> orderList = orderDao.getOrdersByUserId(userId);
-        Order newOrder = orderList.get(orderList.size() - 1);
-        for (int i = 0; i < cartList.size(); ++i) {
-            OrderItem orderItem = new OrderItem();
-            orderItem.setBook(cartList.get(i).getBook());
-            orderItem.setNum(cartList.get(i).getNum());
-            orderItem.setPrice(cartList.get(i).getPrice());
-            orderItem.setOrderId(newOrder.getOrderId());
-            orderItemDao.save(orderItem);
+        try {
+            for (int i = 0; i < cartList.size(); ++i) {
+                OrderItem orderItem = new OrderItem();
+                orderItem.setBook(cartList.get(i).getBook());
+                orderItem.setNum(cartList.get(i).getNum());
+                orderItem.setPrice(cartList.get(i).getPrice());
+                orderItem.setOrderId(orderId);
+                orderItemDao.save(orderItem);
+            }
         }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+//        int num = 10 /0;  // error test
     }
 
     public List<Order> getOrders(int userId){

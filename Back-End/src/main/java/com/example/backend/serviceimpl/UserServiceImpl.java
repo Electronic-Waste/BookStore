@@ -9,15 +9,19 @@ import com.example.backend.entity.User;
 import com.example.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.annotation.SessionScope;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 @Service
-//@Scope("singleton")
+//@SessionScope
+@Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.INTERFACES)
 public class UserServiceImpl implements UserService{
     @Autowired
     UserDao userDao;

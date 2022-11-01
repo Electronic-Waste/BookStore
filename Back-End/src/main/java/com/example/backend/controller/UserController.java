@@ -14,12 +14,14 @@ import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.data.relational.core.sql.In;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.WebApplicationContext;
 
+import javax.servlet.http.HttpServletRequest;
+import java.awt.*;
 import java.util.List;
 import java.util.Map;
 
 @RestController
-//@Scope("singleton")
 public class UserController {
     @Autowired
     UserService userService;
@@ -31,10 +33,10 @@ public class UserController {
      */
     @RequestMapping("/login")
     public Msg login(@RequestBody Map<String, String> params) {
-        System.out.println("BackEnd YES");
+//        System.out.println("BackEnd YES");
         int userid = Integer.parseInt(params.get(Constant.USER_ID));
         String password = params.get(Constant.PASSWORD);
-        System.out.println(userid + " " + password);
+//        System.out.println(userid + " " + password);
         User result = userService.checkUser(userid, password);
         System.out.println(result);
         if (result != null) {
@@ -44,6 +46,9 @@ public class UserController {
             data.put(Constant.USER_TYPE, result.getRole());
 
             userService.startCountTime();   // start count time
+//            System.out.println(userService);
+//            System.out.println(this);
+//            System.out.println(request.getSession());
 
             return MsgUtil.makeMsg(MsgCode.SUCCESS, MsgUtil.SUCCESS_MSG, data);
         }
@@ -58,7 +63,10 @@ public class UserController {
      */
     @RequestMapping("/logout")
     public Msg logout() {
-        System.out.println("Logout");
+//        System.out.println("Logout");
+//        System.out.println(userService);
+//        System.out.println(this);
+//        System.out.println(request.getSession());
         long interval = userService.finishCountTime();  // finish count time
         JSONObject data = new JSONObject();
         data.put("interval", interval);
