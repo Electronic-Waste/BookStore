@@ -4,6 +4,7 @@ import {deleteAllCart, deleteCart, getCart} from "../services/cartService";
 import {Link} from "react-router-dom";
 import {createMultipleOrders, createOrder} from "../services/orderService";
 import {Button} from "antd";
+import {openWebSocket, websocket} from "../utils/websocket";
 
 export class CartExcel extends React.Component {
     constructor(props) {
@@ -16,6 +17,11 @@ export class CartExcel extends React.Component {
     }
 
     componentDidMount() {
+        openWebSocket(this.state.userId);
+        websocket.onmessage = (evt) => {
+            let msg = JSON.parse(evt.data);
+            console.log(msg);
+        }
         this.refreshPage();
     }
 
@@ -23,6 +29,7 @@ export class CartExcel extends React.Component {
         let data = {"userId": this.state.userId};
         const callback = (data) => {
             this.setState({carts: data.data.carts});
+            // console.log(this.state.carts);
         }
         getCart(data, callback);
     }
@@ -31,7 +38,7 @@ export class CartExcel extends React.Component {
         const bookId = e.target.dataset.key;
         const data = {"bookId": bookId, "userId": this.state.userId};
         createOrder(data);
-        deleteCart(data);
+        // deleteCart(data);
         this.refreshPage();
     }
 
@@ -39,7 +46,7 @@ export class CartExcel extends React.Component {
         e.preventDefault();
         const data = {"userId": this.state.userId};
         createMultipleOrders(data);
-        deleteAllCart(data);
+        // deleteAllCart(data);
         this.refreshPage();
     }
 

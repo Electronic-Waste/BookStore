@@ -50,6 +50,7 @@ export class OrderExcel extends React.Component
             this.setState({
                 orders: data.data.orders
             })
+            console.log(this.state.orders);
         }
         getOrders(data, callback);
     }

@@ -7,7 +7,7 @@ export function postRequest(url, json, callback)
         headers: {
             'Content-Type': 'application/json'
         },
-        credential: "include"
+        credentials: "include"
     }
 
     // console.log("opts");
@@ -34,7 +34,7 @@ export function postRequest_noRet(url, json) {
         headers: {
             'Content-Type': 'application/json'
         },
-        credential: "include"
+        credentials: "include"
     }
     // console.log("opts");
     // console.log(opts);
