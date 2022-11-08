@@ -18,3 +18,8 @@ export const deleteBook = (bookId) => {
     let userId = window.location.href.split('/')[3];
     window.open("/" + userId + "/HomeView", "_self");
 }
+
+export const getBookWithFullTextSearch = (data, callback) => {
+    const url = "http://localhost:8080/solr/search";
+    postRequest(url, data, callback);
+}

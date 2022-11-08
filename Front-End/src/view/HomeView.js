@@ -5,7 +5,7 @@ import {SideBar} from "../components/SideBar";
 import {ClassifyBox, SearchBox} from "../components/SearchBox";
 import {BookCarousel} from "../components/Carousel";
 import {BookExcel} from "../components/BookExcel";
-import {getBooks} from "../services/bookService";
+import {getBooks, getBookWithFullTextSearch} from "../services/bookService";
 
 export const headers = ["bookId", "bookname", "author", "type", "price", "description", "inventory", "image"];
 
@@ -35,10 +35,23 @@ export class HomeView extends React.Component {
         let filterText = document.getElementById("search-bar").value;
         // console.log(filterText);
         // console.log(this.state.books);
-        let dataSlice = this.state.books.filter(function (row) {
-            return row.bookname.toString().toLowerCase().indexOf(filterText) > -1;
-        });
-        this.setState({booksOnDisplay: dataSlice});
+        let isBookName = document.getElementById("search-switch").ariaChecked.toString();
+        console.log(isBookName);
+        let dataSlice = [];
+        if (isBookName == "true") {
+            dataSlice = this.state.books.filter(function (row) {
+                return row.bookname.toString().toLowerCase().indexOf(filterText) > -1;
+            });
+            this.setState({booksOnDisplay: dataSlice});
+        }
+        else {
+            let data = {"filterText": filterText};
+            const callback = (retData) => {
+                this.setState({booksOnDisplay: retData});
+            }
+            getBookWithFullTextSearch(data, callback);      // Get data from solr
+        }
+
     }
 
     render() {

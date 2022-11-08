@@ -3,23 +3,48 @@ import React from "react";
 import "../css/home.css"
 import searchIcon from "../assets/search.svg"
 import Search from "antd/es/input/Search";
+import {Switch} from "antd";
 
 export class SearchBox extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            isFullText: false
+        }
+        this.switchState = this.switchState.bind(this);
+    }
+
+    getPlaceHolder = () =>
+        this.state.isFullText ? "Input keywords of the book's description" : "Input the book name";
+
+    switchState(e) {
+        this.setState({
+            isFullText: !this.state.isFullText
+        })
     }
 
     render() {
         return (
             <div className="search">
-                <Search
-                    id = "search-bar"
-                    placeholder="Input the book name"
-                    allowClear
-                    enterButton="Search"
-                    size="large"
-                    onSearch={this.props.search}
-                />
+                <div style={{marginLeft: "500px"}}>
+                    <Switch
+                        id = "search-switch"
+                        checkedChildren="Book-Name-Search"
+                        unCheckedChildren="Full-Text_Search"
+                        onChange={this.switchState}
+                        defaultChecked/>
+                </div>
+                <div style={{marginTop: "20px"}}>
+                    <Search
+                        id = "search-bar"
+                        placeholder={this.getPlaceHolder()}
+                        allowClear
+                        enterButton="Search"
+                        size="large"
+                        onSearch={this.props.search}
+                    />
+                </div>
             </div>
         );
     }
