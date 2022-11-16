@@ -17,8 +17,6 @@ import java.util.List;
 
 @Component
 public class SolrUtil {
-    @Autowired
-    private BookService bookService;
 
     private final SolrClient client;
 
