@@ -2,7 +2,7 @@ import {postRequest} from "../utils/ajax";
 
 
 export const login = (data, navigate) => {
-    let url = "http://localhost:8080/login";
+    let url = "http://localhost:8080/bookstore/login";
     const callback = (data) => {
         if (data.status >= 0 && data.data.role >= 0) {
             let userId = data.data.userId;
@@ -20,7 +20,7 @@ export const login = (data, navigate) => {
 }
 
 export const register = (data) => {
-    let url = "http://localhost:8080/register";
+    let url = "http://localhost:8080/bookstore/register";
     const callback = (data) => {
         if (data.status >= 0) {
             let userId = data.data.userId;
@@ -36,12 +36,12 @@ export const register = (data) => {
 }
 
 export const getUsers = (callback) => {
-    const url = "http://localhost:8080/getUsers";
+    const url = "http://localhost:8080/bookstore/getUsers";
     const data = {"search": null};
     postRequest(url, data, callback);
 }
 
 export const banUser = (data, callback) => {
-    const url = "http://localhost:8080/banUser";
+    const url = "http://localhost:8080/bookstore/banUser";
     postRequest(url, data, callback);
 }

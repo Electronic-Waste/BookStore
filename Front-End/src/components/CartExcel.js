@@ -37,7 +37,7 @@ export class CartExcel extends React.Component {
     hanleClick = (e) => {
         const bookId = e.target.dataset.key;
         const data = {"bookId": bookId, "userId": this.state.userId};
-        createOrder(data);
+        createOrder(data, this.state.carts);
         // deleteCart(data);
         this.refreshPage();
     }
@@ -45,7 +45,7 @@ export class CartExcel extends React.Component {
     buyAll = (e) => {
         e.preventDefault();
         const data = {"userId": this.state.userId};
-        createMultipleOrders(data);
+        createMultipleOrders(data, this.state.carts);
         // deleteAllCart(data);
         this.refreshPage();
     }

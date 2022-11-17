@@ -86,7 +86,7 @@ export function SideBar (props) {
 
     useEffect(() => {
         let data = {"userId": userId};
-        let url = "http://localhost:8080/getUser";
+        let url = "http://localhost:8080/bookstore/getUser";
         const callback = (data) => {
             let role = data.data.role;
             setRole(role);
@@ -119,7 +119,7 @@ export function SideBar (props) {
     }
 
     const handleClickSignOut = (e) => {
-        let url = "http://localhost:8080/logout";
+        let url = "http://localhost:8080/bookstore/logout";
         let callback = (data) => {
             console.log(data);
             let interval = data.data.interval;

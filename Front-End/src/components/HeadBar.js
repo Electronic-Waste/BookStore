@@ -35,7 +35,7 @@ export class UserIcon extends React.Component {
     componentDidMount() {
         let id = this.props.id;
         let data = {"userId": id};
-        let url = "http://localhost:8080/getUser";
+        let url = "http://localhost:8080/bookstore/getUser";
         const callback = (data) => {
             this.setState({
                 username: data.data.username

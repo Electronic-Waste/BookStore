@@ -2,7 +2,7 @@
 export let websocket = null;
 
 export function openWebSocket (uid) {
-    websocket = new WebSocket("ws://localhost:8080/websocket/order/" + uid);
+    websocket = new WebSocket("ws://localhost:8080/bookstore/websocket/order/" + uid);
 
     websocket.onopen = function () {
         console.log(uid + " connected!")

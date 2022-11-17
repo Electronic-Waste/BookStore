@@ -2,18 +2,11 @@ server:
   port: 8080
   error:
     include-message: always
+
 spring:
-  cloud:
-    gateway:
-      globalcors:
-        cors-configurations:
-          '[/**]':
-            allowedOrigins: "*"
-            allowedMethods:
-              - GET
-              - POST
   application:
     name: gateway
+
 eureka:
   instance:
     prefer-ip-address: true

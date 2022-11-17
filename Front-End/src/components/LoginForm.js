@@ -12,7 +12,7 @@ export function LoginForm ()
     const navigate = useNavigate();
 
     const handleLogin = userInfo => {
-        console.log(userInfo);
+        // console.log(userInfo);
         login(userInfo, navigate);
     }
 
