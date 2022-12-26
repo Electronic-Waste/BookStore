@@ -38,6 +38,12 @@ public class BookController {
         return bookService.findBookById(id);
     }
 
+    @RequestMapping("/getBooksByLabel")
+    public List<Book> getBooksByLabel(@RequestBody Map<String, String> params) {
+        String label = params.get("label");
+        return bookService.getBooksByLabel(label);
+    }
+
     @RequestMapping("/addBook")
     public void addBook(@RequestBody Map<String, String> params) {
         bookService.addBook(params);

@@ -23,3 +23,8 @@ export const getBookWithFullTextSearch = (data, callback) => {
     const url = "http://localhost:8080/solr/search";
     postRequest(url, data, callback);
 }
+
+export const getBooksByLabel = (data, callback) => {
+    const url = "http://localhost:8080/getBooksByLabel";
+    postRequest(url, data, callback);
+}

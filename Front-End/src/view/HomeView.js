@@ -5,7 +5,7 @@ import {SideBar} from "../components/SideBar";
 import {ClassifyBox, SearchBox} from "../components/SearchBox";
 import {BookCarousel} from "../components/Carousel";
 import {BookExcel} from "../components/BookExcel";
-import {getBooks, getBookWithFullTextSearch} from "../services/bookService";
+import {getBooks, getBooksByLabel, getBookWithFullTextSearch} from "../services/bookService";
 
 export const headers = ["bookId", "bookname", "author", "type", "price", "description", "inventory", "image"];
 
@@ -45,11 +45,11 @@ export class HomeView extends React.Component {
             this.setState({booksOnDisplay: dataSlice});
         }
         else {
-            let data = {"filterText": filterText};
+            let data = {"label": filterText};
             const callback = (retData) => {
                 this.setState({booksOnDisplay: retData});
             }
-            getBookWithFullTextSearch(data, callback);      // Get data from solr
+            getBooksByLabel(data, callback);      // Get data from neo4j type seach
         }
 
     }

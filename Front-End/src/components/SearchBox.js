@@ -31,7 +31,7 @@ export class SearchBox extends React.Component {
                     <Switch
                         id = "search-switch"
                         checkedChildren="Book-Name-Search"
-                        unCheckedChildren="Full-Text_Search"
+                        unCheckedChildren="Book-Label-Search"
                         onChange={this.switchState}
                         defaultChecked/>
                 </div>

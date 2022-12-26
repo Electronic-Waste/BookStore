@@ -9,6 +9,8 @@ public interface BookDao {
 
     List<Book> getBooks();
 
+    List<Book> getBooksByType(String type);
+
     void save(Book book);
 
     void deleteById(int id);

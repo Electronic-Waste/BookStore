@@ -58,9 +58,9 @@ export class OrderExcel extends React.Component
     render() {
         return (
             <div className="orderExcel">
-                <div className="orderExcel-search">
-                    <SearchBox search={this.handleClick}/>
-                </div>
+                {/*<div className="orderExcel-search">*/}
+                {/*    <SearchBox search={this.handleClick}/>*/}
+                {/*</div>*/}
                 <div className="orderExcel-content">
                     {this.state.orders.map((order, idx) =>
                         <div className="order" key={order["orderId"]}>

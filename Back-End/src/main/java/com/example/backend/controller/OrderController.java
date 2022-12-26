@@ -26,28 +26,28 @@ public class OrderController {
     @Autowired
     OrderService orderService;
 
-    @Autowired
-    KafkaTemplate<String, String> kafkaTemplate;
+//    @Autowired
+//    KafkaTemplate<String, String> kafkaTemplate;
 
     @RequestMapping("/oneorder")
     public void createOrder(@RequestBody Map<String, String> params) {
-//        int userId = Integer.parseInt(params.get("userId"));
-//        int bookId = Integer.parseInt(params.get("bookId"));
-//        System.out.println(bookId);
-//        orderService.createOneOrder(userId, bookId);
-        JSONObject object = new JSONObject();
-        object.put("userId", params.get("userId"));
-        object.put("bookId", params.get("bookId"));
-        kafkaTemplate.send("createOrder", "key", object.toJSONString());
+        int userId = Integer.parseInt(params.get("userId"));
+        int bookId = Integer.parseInt(params.get("bookId"));
+        System.out.println(bookId);
+        orderService.createOneOrder(userId, bookId);
+//        JSONObject object = new JSONObject();
+//        object.put("userId", params.get("userId"));
+//        object.put("bookId", params.get("bookId"));
+//        kafkaTemplate.send("createOrder", "key", object.toJSONString());
     }
 
     @RequestMapping("/multipleorders")
     public void createMultipleOrders(@RequestBody Map<String, String> params) {
-//        int userId = Integer.parseInt(params.get("userId"));
-//        orderService.createMultipleOrders(userId);
-        JSONObject object = new JSONObject();
-        object.put("userId", params.get("userId"));
-        kafkaTemplate.send("createOrder", "key", object.toJSONString());
+        int userId = Integer.parseInt(params.get("userId"));
+        orderService.createMultipleOrders(userId);
+//        JSONObject object = new JSONObject();
+//        object.put("userId", params.get("userId"));
+//        kafkaTemplate.send("createOrder", "key", object.toJSONString());
     }
 
     @RequestMapping("/getorders")

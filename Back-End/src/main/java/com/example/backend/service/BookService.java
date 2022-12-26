@@ -11,6 +11,8 @@ public interface BookService {
 
     List<Book> getBooks();
 
+    List<Book> getBooksByLabel(String label);
+
     void addBook(Map<String, String> params);
 
     void updateBook(Map<String, String> params);
