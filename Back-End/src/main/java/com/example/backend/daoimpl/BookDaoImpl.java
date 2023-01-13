@@ -84,7 +84,7 @@ public class BookDaoImpl implements BookDao {
             System.out.println("Books are in Redis");
             bookList = JSONArray.parseArray(bs.toString(), Book.class);
         }
-        return bookRepository.getBooks();
+        return bookList;
     }
 
     @Override
